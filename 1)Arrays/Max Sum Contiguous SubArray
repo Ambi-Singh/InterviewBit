@@ -1,0 +1,30 @@
+/* Problem Statement
+Find the contiguous subarray within an array, A of length N which has the largest sum.
+
+Input Format:
+
+The first and the only argument contains an integer array, A.
+Output Format:
+
+Return an integer representing the maximum possible sum of the contiguous subarray. */
+
+int Solution::maxSubArray(const vector<int> &A) {
+//int start = 0;
+int maxsum =INT_MIN;
+//instead of equating to zero,we take INT_MIN to tackle the case when only-ve nos. exist
+//Eg:{-200,-20} should give -20 as maxsum and not 0
+int currentsum=0;
+for(int i=0; i<A.size(); i++)
+{
+currentsum+=A[i];
+if(currentsum>maxsum)
+{
+maxsum=currentsum;
+}
+if(currentsum<=0)
+{
+
+currentsum=0;
+}
+}
+return maxsum;}
