@@ -1,0 +1,38 @@
+/* Problem Description
+
+Given an integer array A of size N.
+
+You can pick B elements from either left or right end of the array A to get maximum sum.
+
+Find and return this maximum possible sum.
+
+NOTE: Suppose B = 4 and array A contains 10 elements then
+
+You can pick first four elements or can pick last four elements or can pick 1 from front and 3 from back etc . you need to return the maximum possible sum of elements you can pick.
+
+*/
+
+int Solution::solve(vector<int> &A, int b) {
+    int n=A.size();
+    int currsum=0;
+    for(int i=0;i<b;i++)
+    currsum+=A[i];//Store sum of all elements till bth position
+    int maxsum=currsum;
+    int inc=n-1,exc=b-1;//indexing in array begins from 0,hence subtracting one from n and b
+    while(inc>=0 and exc>=0)
+    //Logic used : include a element from right,exclude a element from left 
+    {
+        currsum+=A[inc--];
+        currsum-=A[exc--];
+        maxsum=max(maxsum,currsum);
+
+    }
+    return maxsum;
+}
+
+
+ 
+ 
+ 
+ 
+ 
