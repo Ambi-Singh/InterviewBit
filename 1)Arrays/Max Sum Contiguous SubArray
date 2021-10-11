@@ -8,6 +8,8 @@ Output Format:
 
 Return an integer representing the maximum possible sum of the contiguous subarray. */
 
+KADANE'S ALGORITHM 
+
 int Solution::maxSubArray(const vector<int> &A) {
 //int start = 0;
 int maxsum =INT_MIN;
@@ -17,11 +19,11 @@ int currentsum=0;
 for(int i=0; i<A.size(); i++)
 {
 currentsum+=A[i];
-if(currentsum>maxsum)
+if(currentsum>maxsum) //check this condition (before equating to currsum to 0,for negative currentsum)or else the program will start failing for arrays of -ve nos.
 {
 maxsum=currentsum;
 }
-if(currentsum<=0)
+if(currentsum<=0) 
 {
 
 currentsum=0;
