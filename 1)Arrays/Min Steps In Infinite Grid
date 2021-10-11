@@ -1,0 +1,29 @@
+/* Problem Description
+
+You are in an infinite 2D grid where you can move in any of the 8 directions
+
+ (x,y) to 
+    (x-1, y-1), 
+    (x-1, y)  , 
+    (x-1, y+1), 
+    (x  , y-1),
+    (x  , y+1), 
+    (x+1, y-1), 
+    (x+1, y)  , 
+    (x+1, y+1) 
+You are given a sequence of points and the order in which you need to cover the points.. Give the minimum number of steps in which you can achieve it. You start from the first point.
+*/
+int Solution::coverPoints(vector<int> &A, vector<int> &B) {
+    int ans = 0;
+    int x = A[0];
+    int y = B[0];
+    //we need to move as per coordinates mentioned in vectors A,B
+    for(int i=0;i<A.size();i++)
+    { int t1 = abs(x - A[i]);//calculate displacement along x
+    int t2 = abs(y - B[i]);//calculate displacement along y
+    ans+=max(t1,t2);//add max of them to ans
+    x = A[i];//update x,y to further calculate displacement along next two coordinates
+    y= B[i];
+    }
+    return ans;
+}
