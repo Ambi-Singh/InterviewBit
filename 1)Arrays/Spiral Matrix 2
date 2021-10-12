@@ -1,0 +1,38 @@
+/* PROBLEM STATEMENT : Given an integer A, generate a square matrix filled with elements from 1 to A2 in spiral order.
+Input Format:
+The first and the only argument contains an integer, A.
+Output Format:
+Return a 2-d matrix of size A x A satisfying the spiral order.
+Constraints:1 <= A <= 1000
+Examples:
+Input 1:
+    A = 3
+Output 1:
+    [   [ 1, 2, 3 ],
+        [ 8, 9, 4 ],
+        [ 7, 6, 5 ]   ] */
+        
+vector<vector<int> > Solution::generateMatrix(int n) {
+     vector<vector<int>> result(n,vector<int> (n));//create a 2D matrix 
+     int count=1;
+	int startrow=0,startcol=0,endrow=n-1,endcol=n-1;
+    while(startrow<=endrow && startcol<=endcol)//CODE IS SIMILAR TO SPIRAL MATRIX 1 ques.
+    {
+        for(int i=startcol;i<=endcol;i++)
+        result[startrow][i]=count++;//store count(with post increment)
+        startrow++;
+        for(int i=startrow;i<=endrow;i++)
+        result[i][endcol]=count++;
+        endcol--;
+        if(endrow>=startrow)//condition check mandatory to handle uneven sized matrices 
+        {for(int i=endcol;i>=startcol;i--)
+        result[endrow][i]=count++;
+        endrow--;}
+        if(endcol>=startcol)//condition check mandatory to handle uneven sized matrices
+       { for(int i=endrow;i>=startrow;i--)
+        result[i][startcol]=count++;
+        startcol++;}
+    }
+    return result;
+}
+
