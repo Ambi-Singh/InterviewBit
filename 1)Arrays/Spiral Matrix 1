@@ -1,0 +1,41 @@
+/* Problem Statement 
+Given a matrix of m * n elements (m rows, n columns), return all elements of the matrix in spiral order.
+
+Example:
+
+Given the following matrix:
+
+[
+    [ 1, 2, 3 ],
+    [ 4, 5, 6 ],
+    [ 7, 8, 9 ]
+]
+You should return
+
+[1, 2, 3, 6, 9, 8, 7, 4, 5] */
+
+vector<int> Solution::spiralOrder(const vector<vector<int> > &A) {
+   vector<int> result;
+   int m=A.size();//no.of rows
+   int n=A[0].size();//no.of columns
+	int startrow=0,startcol=0,endrow=m-1,endcol=n-1;
+    while(startrow<=endrow && startcol<=endcol)
+    {
+        for(int i=startcol;i<=endcol;i++)
+        result.push_back(A[startrow][i]);
+        startrow++;
+        for(int i=startrow;i<=endrow;i++)
+        result.push_back(A[i][endcol]);
+        endcol--;
+        if(endrow>=startrow)//condition check mandatory to handle uneven sized matrices 
+        {for(int i=endcol;i>=startcol;i--)
+        result.push_back(A[endrow][i]);
+        endrow--;}
+        if(endcol>=startcol)//condition check mandatory to handle uneven sized matrices
+       { for(int i=endrow;i>=startrow;i--)
+        result.push_back(A[i][startcol]);
+        startcol++;}
+    }
+    return result;
+    
+}
