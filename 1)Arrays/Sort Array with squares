@@ -1,0 +1,21 @@
+Problem Description
+Given a sorted array A containing N integers both positive and negative.
+You need to create another array containing the squares of all the elements in A and return it in non-decreasing order.
+Try to this in O(N) time.
+
+vector<int> Solution::solve(vector<int> &a) {
+    int n=a.size();
+    vector<int>v;
+    int i=0,j=n-1;//Given a sorted array,so we use 2 pointers i,j from both ends and compare
+    while(i<=j)
+    {
+if(abs(a[i])>abs(a[j]))//if abs(i)>abs(j),square of A[i] will eventually be greater 
+             {v.push_back(a[i]*a[i]);
+      i++;}//increment i
+else 
+{v.push_back(a[j]*a[j]);
+j--;}
+    }
+    reverse(v.begin(),v.end());//we get an array in descending order,hence reversing it
+    return v;
+}
