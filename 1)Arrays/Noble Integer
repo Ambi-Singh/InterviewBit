@@ -1,0 +1,25 @@
+Problem Description
+Given an integer array A, find if an integer p exists in the array such that the number of integers greater than p in the array equals to p.
+Input Format
+First and only argument is an integer array A.
+Output Format
+Return 1 if any such integer p is found else return -1.
+
+int Solution::solve(vector<int> &A) {
+//we need to find how many elements are greater than p,if they are equal to p,we return 1
+//Eg:A=[3,2,1,3] after sorting is A=[1,2,3,3].For integer 2,we have 2elements greater than it
+//Hence we return 1
+//we traverse once through our sorted array
+//if A[i]==j,where j is the no.of elements greater than it
+ int n=A.size();
+sort(A.begin(),A.end());//sort the array
+if(A[n-1]==0)return 1;
+//after sorting,if last element is 0,this would mean no greater nos.are presnt in array
+//Hence we return 1,bcoz 0 here becomes the noble element
+for(int i=0;i<n;i++){
+int j=n-i-1;//j now stores the number of elements greater than A[i]as this is a sorted array
+if(A[i]!=A[i+1]){//if A[i]!=A[i+1],skip elements that are equal to A[i]
+if(A[i]==j)return 1;//if not equal and A[i]=j,this means we got a noble integer
+}
+}
+return -1;}//else return -1 if not found anything
