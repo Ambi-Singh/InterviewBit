@@ -1,0 +1,21 @@
+Reverse a linked list. Do it in-place and in one-pass.
+
+For example:
+
+Given 1->2->3->4->5->NULL,
+
+return 5->4->3->2->1->NULL.
+
+ListNode* Solution::reverseList(ListNode* head) {
+    ListNode *curr=head;
+    ListNode *prev=NULL;
+    ListNode *nextnode=NULL;
+    while(curr!=NULL)
+    {
+        nextnode=curr->next;//allocate the next node as the one just after the current node
+        curr->next=prev;//update the curr->next to point to its prev node 
+        prev=curr;
+        curr=nextnode;
+
+    }
+    return prev;}
