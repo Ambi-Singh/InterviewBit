@@ -1,0 +1,39 @@
+/* Problem Description
+
+Given a linked list A of length N and an integer B.
+
+You need to find the value of the Bth node from the middle towards the beginning of the Linked List A.
+
+If no such element exists, then return -1.
+
+NOTE:
+
+Position of middle node is: (N/2)+1, where N is the total number of nodes in the list. */
+
+
+
+int getcount(ListNode* head)//function that returns no.of nodes present in the linked list
+ { int count =0;
+ ListNode* curr=head;
+ while(curr!=NULL)
+ {count++;
+ curr=curr->next;}
+ return count;
+ }
+int Solution::solve(ListNode* head, int k) {
+int n=getcount(head);
+int reqnode=(n/2)+1-k;//(n/2+1)is the middle node of LL they have mentioned in the ques.
+if(reqnode<=0)
+return -1;
+else{
+    ListNode* curr=head;
+    int count=1;
+    while(curr!=NULL)
+    {
+        if(count==reqnode)
+        return curr->val;
+        count++;
+        curr=curr->next;
+    }
+}
+}
