@@ -1,0 +1,24 @@
+Write a program to find the node at which the intersection of two singly linked lists begins.
+
+For example, the following two linked lists:
+
+
+A:          a1 → a2
+                   ↘
+                     c1 → c2 → c3
+                   ↗
+B:     b1 → b2 → b3
+
+begin to intersect at node c1.
+
+ListNode* Solution::getIntersectionNode(ListNode* headA, ListNode* headB) {
+    if(headA==NULL || headB==NULL)
+    return NULL;
+    ListNode* a=headA;
+    ListNode* b=headB;
+    while(a!=b)
+    {//keep moving pointer ahead for both lists until u find a null node
+    a= (a==NULL)?headB:a->next;//if a becomes null,begin again from headB
+    b= (b==NULL)?headA:b->next;//if b becomes null,begin again from headA
+    }
+    return a;}
