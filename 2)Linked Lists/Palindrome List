@@ -1,0 +1,51 @@
+Given a singly linked list, determine if its a palindrome. Return 1 or 0 denoting if its a palindrome or not, respectively.
+
+Notes:
+
+Expected solution is linear in time and constant in space.
+For example,
+
+List 1-->2-->1 is a palindrome.
+List 1-->2-->3 is not a palindrome.
+
+ListNode* reverse(ListNode *head)//function to reverse a linked list
+ {
+     ListNode *prev = NULL;
+     ListNode *curr=head;
+     ListNode *fur=head;
+     while(fur!=NULL)
+     {
+         fur = fur->next;
+         curr->next =prev;
+         prev=curr;
+         curr=fur;
+     }
+     return prev;
+
+ }
+ ListNode *middle(ListNode *head)//function to find the middle node of a linked list using slow,fast runner methods
+ {
+     ListNode *slow=head;
+     ListNode *fast = head;
+     while(fast ->next!=NULL && fast->next->next!=NULL)
+     {
+         slow=slow->next;
+         fast=fast->next->next;
+     }
+     return slow;
+ }
+int Solution::lPalin(ListNode* head) {
+    //now use 2 nodes,one would point to LL till middle point,other from the next node of the middle to end
+    ListNode *mid=middle(head);
+    ListNode *temphead = mid->next;
+    mid->next=NULL;
+    temphead = reverse(temphead);//we shall now compare first half and the reversed second half of ll
+    while(temphead!=NULL && head!=NULL)
+    {
+        if(temphead->val!=head->val)
+        return 0;
+        temphead=temphead->next;
+        head=head->next;
+    }
+    return 1;
+}
