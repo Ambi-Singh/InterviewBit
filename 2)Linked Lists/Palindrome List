@@ -8,44 +8,49 @@ For example,
 List 1-->2-->1 is a palindrome.
 List 1-->2-->3 is not a palindrome.
 
-ListNode* reverse(ListNode *head)//function to reverse a linked list
- {
-     ListNode *prev = NULL;
-     ListNode *curr=head;
-     ListNode *fur=head;
-     while(fur!=NULL)
-     {
-         fur = fur->next;
-         curr->next =prev;
-         prev=curr;
-         curr=fur;
-     }
-     return prev;
-
- }
- ListNode *middle(ListNode *head)//function to find the middle node of a linked list using slow,fast runner methods
- {
-     ListNode *slow=head;
-     ListNode *fast = head;
-     while(fast ->next!=NULL && fast->next->next!=NULL)
-     {
-         slow=slow->next;
-         fast=fast->next->next;
-     }
-     return slow;
- }
-int Solution::lPalin(ListNode* head) {
-    //now use 2 nodes,one would point to LL till middle point,other from the next node of the middle to end
-    ListNode *mid=middle(head);
-    ListNode *temphead = mid->next;
-    mid->next=NULL;
-    temphead = reverse(temphead);//we shall now compare first half and the reversed second half of ll
-    while(temphead!=NULL && head!=NULL)
+ ListNode* midpoint(ListNode *head)//to find middle node of LL
     {
-        if(temphead->val!=head->val)
-        return 0;
-        temphead=temphead->next;
-        head=head->next;
+        ListNode*slow=head;
+        ListNode*fast=head;
+        while(fast!=NULL && fast->next!=NULL)
+        {slow=slow->next;
+         fast=fast->next->next;
+            
+        }
+        return slow;
     }
-    return 1;
+    ListNode* reverseLL(ListNode *head)//to reverse a LL
+    {
+        ListNode*currptr=head;
+        ListNode*prevptr=NULL;
+        ListNode*nextptr=NULL;
+        while(currptr!=NULL)
+        {
+            nextptr=currptr->next;
+            currptr->next=prevptr;
+            prevptr=currptr;
+            currptr=nextptr;
+        }
+        return prevptr;
+    }
+   
+int Solution::lPalin(ListNode* head) {
+   if(head==NULL || head->next==NULL)//check if head node or its next is null
+            return 1;
+        ListNode*midnode=midpoint(head);//Find the middle node 
+    midnode=reverseLL(midnode);//Reverse the LL from middle node
+if(head->val!=midnode->val)//return false if the middlenode->val(reveresed LL)!=head->val
+                return 0;
+        ListNode*temphead=midnode->next;//store the next node of middlenode in temphead
+        midnode->next=NULL;//break LL after middle node
+        head=head->next;//move head a pointer ahead,as we have already checked it with midnode
+        while(temphead!=NULL && head!=NULL)//keep checking until temphead,head are not null
+        {
+            if(head->val!=temphead->val)
+                return 0;
+            head=head->next;
+            temphead=temphead->next;
+            
+        }
+      return 1;
 }
