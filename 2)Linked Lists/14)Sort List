@@ -1,0 +1,55 @@
+Sort a linked list in O(n log n) time using constant space complexity.
+
+Example :
+
+Input : 1 -> 5 -> 4 -> 3
+
+Returned list : 1 -> 3 -> 4 -> 5
+
+//WE USE MERGE SORT in this,breaking the list from its middle point again & again,sorting individual lists 
+ //then merge those smaller sorted lists into one
+ ListNode* mergeTwoLists(ListNode* A, ListNode* B) {
+    ListNode* head;
+    if(A->val<B->val)
+    {
+        head=A;
+        A=A->next;
+    }
+    else{
+        head=B;
+        B=B->next;
+    }
+ListNode* temp=head;
+while(A&&B)
+{
+    if(A->val<B->val)
+    {
+        temp->next=A;
+        A=A->next;
+    }
+    else {
+        temp->next=B;
+        B=B->next;
+    }
+    temp=temp->next;
+}
+if(A)
+temp->next=A;
+if(B)
+temp->next=B;
+return head;
+}
+ListNode* Solution::sortList(ListNode* head) {
+//find middle point,then break the list
+    if(head==NULL || head->next == NULL)
+    return head;
+    ListNode* slow=head,*fast=head;
+    while(fast->next && fast->next->next)
+    {
+        fast=fast->next->next;
+        slow=slow->next;
+    }
+    fast=slow->next;
+    slow->next=NULL;
+  return mergeTwoLists(sortList(head),sortList(fast));
+}
