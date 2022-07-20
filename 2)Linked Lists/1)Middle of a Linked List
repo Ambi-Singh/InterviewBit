@@ -10,7 +10,12 @@ Explanation: Since the list has two middle nodes with values 3 and 4, we return 
 
 class Solution {
 public:
-    ListNode* middleNode(ListNode* head) { //middle point is usually the (n/2+1)th node in a LL
+    ListNode* middleNode(ListNode* head) { 
+   //middle point is the (n/2+1)th node in the LL,(5/2)+1= 3rd node for eg:1,(6/2)+1 = 4th node for eg:2
+   //Naive solution would be counting all nodes present in the LL,and then reaching out to the [(n/2)+1]th node everytime
+   //Time Complexity would be O(N) + O(N/2) in this case,Hence we go to the tortoise method
+   
+   //TORTOISE METHOD 
         ListNode* slow=head;//slow,fast pointers begin with the head node
         ListNode*fast=head;
         while(fast!=NULL && fast->next!=NULL)
@@ -21,3 +26,4 @@ public:
         return slow;
     }
 };
+//TORTOISE METHOD has O(N/2) time complexity,hence a better solution to this problem
